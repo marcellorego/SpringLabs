@@ -11,7 +11,7 @@ public class App
 {
     public static void main( String[] args )
     {
-    	ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+    	ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
 		HelloWorld obj = (HelloWorld) context.getBean("helloBean");
 		System.out.println(obj.sayHello());

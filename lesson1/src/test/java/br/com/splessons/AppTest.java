@@ -38,12 +38,12 @@ public class AppTest
 	protected void setUp() throws Exception {
 		// TODO Auto-generated method stub
 		super.setUp();
-		context = new ClassPathXmlApplicationContext("context.xml");
+		context = new ClassPathXmlApplicationContext("beans.xml");
 	}
 
     public void testApp()
     {
     	HelloWorld obj = (HelloWorld) context.getBean("helloBean");
-        assertTrue( "Hello, Lesson 1".equals(obj.sayHello()) );
+        assertTrue( "Hello, Lesson 1!".equals(obj.sayHello()) );
     }
 }
