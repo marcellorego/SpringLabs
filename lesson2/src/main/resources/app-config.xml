@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+ 
+    <bean id="helloWorldBean" class="br.com.splessons.domain.impl.HelloWorldImpl" />
+  
+  	<bean id="activeMqMessaging" class="br.com.splessons.domain.impl.ActiveMQMessagingImpl" />
+ 
+	<bean id="hexEncryption" class="br.com.splessons.domain.impl.HexEncryptionImpl">
+		<property name="salt" value="10"/>
+	</bean>
+ 
+    <bean id="communication" class="br.com.splessons.domain.impl.CommunicationImpl">
+    	<constructor-arg>
+            <ref bean="hexEncryption" />
+        </constructor-arg>
+        <property name="messaging">
+            <ref bean="activeMqMessaging" />
+        </property>        
+    </bean>
+    
+    <bean id="communication2" class="br.com.splessons.domain.impl.CommunicationImpl" autowire="byType"/>    	       
+</beans>
