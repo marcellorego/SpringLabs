@@ -26,6 +26,7 @@ public class ApplicationAnnotation {
         try {
         	instance.sayHello();
         	instance.sendMessage();
+        	instance.sendMessageQualified();
         } finally {
         	instance.closeContext();
         }
@@ -38,6 +39,11 @@ public class ApplicationAnnotation {
 	
 	private void sendMessage() {
 		ICommunication app = (ICommunication) context.getBean("communication");
+        app.communicate();
+	}
+	
+	private void sendMessageQualified() {
+		ICommunication app = (ICommunication) context.getBean("communicationQualified");
         app.communicate();
 	}
 }
