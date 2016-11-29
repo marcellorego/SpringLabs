@@ -10,3 +10,7 @@ Spring Beans Auto-wiring Example using XML configuration
 
 ## Lesson 3
 Spring Dependency Injection Annotation Example & Autowiring using @Autowired, @Qualifier & @Resource annotations configuration
+Spring Auto-detection & Component Scanning Example With Annotations
+
+## Lesson 4
+Spring4 + Hibernate4 + MySQL + Maven integration example using annotations
