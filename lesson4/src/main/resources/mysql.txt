@@ -1,0 +1,7 @@
+mysqladmin -u root -p shutdown
+
+mysql -u USERNAME -p
+
+show databases;
+
+use DBNAME;

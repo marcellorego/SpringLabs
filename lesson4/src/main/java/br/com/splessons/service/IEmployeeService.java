@@ -15,4 +15,8 @@ public interface IEmployeeService {
     Employee findBySsn(String ssn);
  
     void updateEmployee(Employee employee);
+    
+    Employee findById(Long id);
+    
+    void deleteAll();
 }

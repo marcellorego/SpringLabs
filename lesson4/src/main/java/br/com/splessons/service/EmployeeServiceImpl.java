@@ -35,4 +35,13 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public void updateEmployee(Employee employee){
         dao.updateEmployee(employee);
     }
+    
+    public Employee findById(Long id) {
+        return dao.findById(id);
+    }
+    
+    public void deleteAll() {
+    	//dao.deleteAll();
+    	findAllEmployees().forEach(item->deleteEmployeeBySsn(item.getSsn()));
+    }
 }

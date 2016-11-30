@@ -1,7 +1,7 @@
 package br.com.splessons.dao;
 
 import java.util.List;
- 
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import br.com.splessons.model.Employee;
 
 @Repository("employeeDao")
-public class EmployeeDaoImpl extends AbstractDao implements IEmployeeDao {
+public class EmployeeDaoImpl extends AbstractDao<Employee> implements IEmployeeDao {
  
     public void saveEmployee(Employee employee) {
         persist(employee);
@@ -37,4 +37,9 @@ public class EmployeeDaoImpl extends AbstractDao implements IEmployeeDao {
     public void updateEmployee(Employee employee){
         getSession().update(employee);
     }
+    
+    public Employee findById(Long id){
+    	Employee result = (Employee) get(id);
+        return result;
+    }    
 }

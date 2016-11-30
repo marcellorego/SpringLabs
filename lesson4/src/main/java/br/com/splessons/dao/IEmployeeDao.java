@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.splessons.model.Employee;
   
-public interface IEmployeeDao {
+public interface IEmployeeDao extends IAbstractDao<Employee> {
  
     void saveEmployee(Employee employee);
      

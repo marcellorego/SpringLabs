@@ -18,7 +18,7 @@ public class Employee {
  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
  
     @Column(name = "NAME", nullable = false)
     private String name;
@@ -33,11 +33,11 @@ public class Employee {
     @Column(name = "SSN", unique=true, nullable = false)
     private String ssn;
  
-    public int getId() {
+    public Long getId() {
         return id;
     }
  
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
  
@@ -77,7 +77,7 @@ public class Employee {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + id.intValue();
         result = prime * result + ((ssn == null) ? 0 : ssn.hashCode());
         return result;
     }
@@ -103,7 +103,7 @@ public class Employee {
  
     @Override
     public String toString() {
-        return "Employee [id=" + id + ", name=" + name + ", joiningDate="
-                + joiningDate + ", salary=" + salary + ", ssn=" + ssn + "]";
+        return "Employee [id=" + getId() + ", name=" + getName() + ", joiningDate="
+                + getJoiningDate() + ", salary=" + getSalary() + ", ssn=" + getSsn() + "]";
     }
 }
