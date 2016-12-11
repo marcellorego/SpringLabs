@@ -42,6 +42,6 @@ public abstract class AbstractDao<T> {
     }
     
     public void deleteAll() {
-    	getSession().createQuery("delete from " + persistentClass.getCanonicalName()).executeUpdate();
+    	getSession().createQuery("delete from " + persistentClass.getSimpleName().toUpperCase()).executeUpdate();
     }
 }

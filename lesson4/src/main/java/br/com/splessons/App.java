@@ -3,8 +3,7 @@ package br.com.splessons;
 import java.math.BigDecimal;
 
 import org.joda.time.LocalDate;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import br.com.splessons.model.Employee;
 import br.com.splessons.service.IEmployeeService;
@@ -17,13 +16,13 @@ public class App
 {
     public static void main( String[] args )
     {
-    	final AbstractApplicationContext context = new ClassPathXmlApplicationContext("app-config.xml");
+    	//final AbstractApplicationContext context = new ClassPathXmlApplicationContext("app-config.xml");
     	
     	//final AbstractApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
     	
-    	/*final AnnotationConfigApplicationContext  context = new AnnotationConfigApplicationContext();
+    	final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
     	context.scan("br.com.splessons.configuration"); 
-    	context.refresh();*/
+    	context.refresh();
     	 
         IEmployeeService service = (IEmployeeService) context.getBean("employeeService");
         

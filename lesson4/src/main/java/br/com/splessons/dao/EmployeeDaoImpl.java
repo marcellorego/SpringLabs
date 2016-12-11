@@ -23,7 +23,11 @@ public class EmployeeDaoImpl extends AbstractDao<Employee> implements IEmployeeD
     }
  
     public void deleteEmployeeBySsn(String ssn) {
-        Query query = getSession().createSQLQuery("delete from Employee where ssn = :ssn");
+    	StringBuilder sb = new StringBuilder();
+    	sb.append("delete from ")
+    	.append(persistentClass.getSimpleName().toUpperCase())
+    	.append(" where ssn = :ssn");
+        Query query = getSession().createSQLQuery(sb.toString());
         query.setString("ssn", ssn);
         query.executeUpdate();
     }
