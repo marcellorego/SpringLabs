@@ -1,19 +1,30 @@
 package br.com.splessons.model;
 
 import java.math.BigDecimal;
- 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
- 
+
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
  
 @Entity
 @Table(name="EMPLOYEE")
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Employee {
  
     @Id
@@ -33,7 +44,7 @@ public class Employee {
     @Column(name = "SSN", unique=true, nullable = false)
     private String ssn;
  
-    public int getId() {
+    /*public int getId() {
         return id;
     }
  
@@ -105,5 +116,5 @@ public class Employee {
     public String toString() {
         return "Employee [id=" + id + ", name=" + name + ", joiningDate="
                 + joiningDate + ", salary=" + salary + ", ssn=" + ssn + "]";
-    }
+    }*/
 }
