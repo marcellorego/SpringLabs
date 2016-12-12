@@ -1,0 +1,20 @@
+### Running a docker mysql instance ###
+
+# docker-machine ip default 192.168.1.110
+
+# docker ps -a
+# docker images
+# docker pull mysql
+# docker rmi mysql
+
+# docker stop spring-mysql
+# docker start spring-mysql
+# docker rm -f spring-mysql
+
+# docker run --name spring-mysql -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=springlesson -e MYSQL_USER=springlesson -e MYSQL_PASSWORD=springlesson -p 3306:3306 -d mysql:5.6
+# docker run -it --link spring-mysql:mysql --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+# docker logs demo-mysql
+
+# SELECT User FROM mysql.user;
+# CREATE USER 'springlesson'@'localhost' IDENTIFIED BY 'springlesson';
+# SHOW GRANTS FOR 'springlesson'@'localhost';

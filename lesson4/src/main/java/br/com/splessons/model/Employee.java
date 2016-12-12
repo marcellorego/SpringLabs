@@ -4,32 +4,27 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
- 
-@Entity
-@Table(name="EMPLOYEE")
+import lombok.ToString;
+import lombok.experimental.NonFinal;
 
 @Data
-@Builder
-@NoArgsConstructor
+@NonFinal
 @AllArgsConstructor
-
-public class Employee {
- 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@NoArgsConstructor
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name="EMPLOYEE")
+public class Employee extends IdBasedEntity {
  
     @Column(name = "NAME", nullable = false)
     private String name;

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.joda.time.LocalDate;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.util.Assert;
 
 import br.com.splessons.model.Employee;
 import br.com.splessons.service.IEmployeeService;
@@ -59,6 +60,8 @@ public class App
         service.saveEmployee(employee1);
         service.saveEmployee(employee2);
         service.saveEmployee(employee3);
+        
+        Assert.isTrue(!employee3.equals(employee2));
         
         /*
          * Get all employees list from database
