@@ -10,8 +10,9 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "br.com.splessons")
+@ComponentScan(basePackages = "br.com.splessons.controller")
 public class HelloWorldConfiguration {
+	
 	@Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

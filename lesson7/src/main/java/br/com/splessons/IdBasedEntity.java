@@ -1,4 +1,4 @@
-package br.com.splessons.model;
+package br.com.splessons;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

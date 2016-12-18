@@ -1,4 +1,4 @@
-package br.com.splessons;
+package br.com.splessons.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

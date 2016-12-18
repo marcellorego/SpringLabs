@@ -1,13 +1,10 @@
-package br.com.splessons.model;
+package br.com.splessons;
 
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,10 +25,6 @@ public class Employee extends IdBasedEntity {
  
     @Column(name = "NAME", nullable = false)
     private String name;
- 
-    @Column(name = "JOINING_DATE", nullable = false)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    private LocalDate joiningDate;
  
     @Column(name = "SALARY", nullable = false)
     private BigDecimal salary;

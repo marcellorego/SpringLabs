@@ -1,5 +1,7 @@
 mvn archetype:generate -DgroupId=br.com.splessons -DartifactId=lesson1 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
 mvn archetype:generate -DgroupId=br.com.splessons -DartifactId=lesson5 -DarchetypeArtifactId=maven-archetype-webapp -Dversion=1.0-SNAPSHOT -DinteractiveMode=false
+
 mvn eclipse:eclipse
 
 
@@ -10,5 +12,6 @@ Below are commonly used Spring annotation which makes a bean auto-detectable:
 @Controller - Used to mark a bean as Controller Component on Presentation layer
 @Configuration - Used to mark a bean as Configuration Component.
 @Component - General purpose annotation, can be used as a replacement for above annotations.
+@RestController - Used to mark a bean as Rest Controller Component
 
 Note that all above mentioned annotations are internally annotated with @Component, so indeed you can use @Component everywhere, but to keep the design & intention clean, it’s advisable to use different annotation based on different condition.

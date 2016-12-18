@@ -12,7 +12,9 @@
 # docker rm -f spring-mysql
 
 # docker run --name spring-mysql -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=springlesson -e MYSQL_USER=springlesson -e MYSQL_PASSWORD=springlesson -p 3306:3306 -d mysql:5.6
+
 # docker run -it --link spring-mysql:mysql --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+
 # docker logs demo-mysql
 
 # SELECT User FROM mysql.user;
