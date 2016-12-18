@@ -1,8 +1,6 @@
 package br.com.splessons.configuration;
 
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-public class HelloWorldInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class HelloWorldInitializer {/*extends AbstractAnnotationConfigDispatcherServletInitializer {
 	@Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[] { HelloWorldConfiguration.class };
@@ -16,5 +14,5 @@ public class HelloWorldInitializer extends AbstractAnnotationConfigDispatcherSer
     @Override
     protected String[] getServletMappings() {
         return new String[] { "/" };
-    }
+    }*/
 }
