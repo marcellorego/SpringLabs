@@ -1,9 +1,9 @@
 package br.com.splessons.configuration;
 
 import java.util.Properties;
- 
+
 import javax.sql.DataSource;
- 
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +25,12 @@ public class HibernateConfiguration {
     @Autowired
     private Environment environment;
  
+    /*@Bean
+    public static PropertySourcesPlaceholderConfigurer placeHolderConfigurer()
+    {
+        return new PropertySourcesPlaceholderConfigurer();
+    }*/
+    
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -58,6 +64,12 @@ public class HibernateConfiguration {
     public HibernateTransactionManager transactionManager(SessionFactory s) {
        HibernateTransactionManager txManager = new HibernateTransactionManager();
        txManager.setSessionFactory(s);
+       //txManager.setNestedTransactionAllowed(Boolean.TRUE);
        return txManager;
     }
+    
+    /*@Bean
+    public PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor() {
+    	return new PersistenceExceptionTranslationPostProcessor();
+    }*/
 }

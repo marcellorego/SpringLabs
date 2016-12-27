@@ -19,4 +19,6 @@ public interface IEmployeeService {
     Employee findById(Long id);
     
     void deleteAll();
+    
+    List<Employee> addNew(Employee employee);
 }
