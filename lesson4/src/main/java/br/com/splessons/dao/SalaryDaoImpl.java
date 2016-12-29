@@ -3,14 +3,9 @@ package br.com.splessons.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
-import org.hibernate.transform.AliasToBeanResultTransformer;
 import org.springframework.stereotype.Repository;
 
 import br.com.splessons.model.Employee;
