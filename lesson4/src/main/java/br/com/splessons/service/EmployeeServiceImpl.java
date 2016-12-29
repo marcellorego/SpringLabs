@@ -17,10 +17,14 @@ public class EmployeeServiceImpl extends BaseImplService<Employee> implements IE
     @Autowired
     private IEmployeeDao dao;
     
+    @Autowired
+	private ISalaryService salaryService;
+    
     public void saveEmployee(Employee employee) {
         TransactionStatus status = transactionManager.getTransaction(getDefaultTransactionDefinition());
     	try {
     		dao.saveEmployee(employee);
+    		employee.getSalaries().forEach(salary -> salaryService.addSalary(salary));
     		transactionManager.commit(status);
     	} catch (Exception e) {
     		transactionManager.rollback(status);
@@ -34,7 +38,11 @@ public class EmployeeServiceImpl extends BaseImplService<Employee> implements IE
  
     @Transactional(propagation=Propagation.REQUIRED)
     public void deleteEmployeeBySsn(String ssn) {
-        dao.deleteEmployeeBySsn(ssn);
+    	Employee employee = findBySsn(ssn);
+    	if (employee != null) {
+    		salaryService.deleteByEmployee(employee);
+    		dao.deleteEmployeeBySsn(ssn);
+    	}
     }
  
     @Transactional(readOnly=true, propagation=Propagation.REQUIRED)
@@ -54,8 +62,9 @@ public class EmployeeServiceImpl extends BaseImplService<Employee> implements IE
     
     @Transactional(propagation=Propagation.REQUIRED)
     public void deleteAll() {
-    	//dao.deleteAll();
-    	findAllEmployees().forEach(item->deleteEmployeeBySsn(item.getSsn()));
+    	
+    	findAllEmployees().stream()
+    		.forEach(item -> deleteEmployeeBySsn(item.getSsn()));
     }
     
     @Transactional(propagation=Propagation.REQUIRED)

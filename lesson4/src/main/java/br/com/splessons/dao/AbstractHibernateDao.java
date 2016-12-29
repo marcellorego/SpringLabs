@@ -4,10 +4,9 @@ import java.lang.reflect.ParameterizedType;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
  
-public abstract class AbstractDao<T> {
+public abstract class AbstractHibernateDao<T> {
  
 	protected Class<T> persistentClass;
 	
@@ -15,7 +14,7 @@ public abstract class AbstractDao<T> {
     private SessionFactory sessionFactory;
  
     @SuppressWarnings("unchecked")
-    public AbstractDao() {
+    public AbstractHibernateDao() {
     	super();
     	
     	this.persistentClass = (Class<T>)
@@ -25,19 +24,6 @@ public abstract class AbstractDao<T> {
     
     protected Session getSession() {
         return sessionFactory.getCurrentSession();
-    }
-    
-    public Transaction beginTransaction() {
-    	Transaction transaction = getSession().beginTransaction();
-        return transaction;
-    }
- 
-    public void commitTransaction(Transaction transaction) {
-    	transaction.commit();
-    }
-	
-    public void rollbackTransaction(Transaction transaction) {
-    	transaction.rollback();
     }
     
     public void persist(Object entity) {

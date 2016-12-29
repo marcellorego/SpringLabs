@@ -16,6 +16,7 @@ import org.joda.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -23,15 +24,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString(exclude="employee")
+@ToString(callSuper = false, exclude="employee")
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name="SALARY")
 @IdClass(SalaryPK.class)
-public final class Salary {
+public class Salary extends BaseEntity {
+
+	private static final long serialVersionUID = -1655950353154120106L;
 
 	@Id
 	@ManyToOne(optional = false)
-	@JoinColumn(nullable = false)
+	@JoinColumn(name = "EMPLOYEE_ID", nullable = false)
 	private Employee employee;
 	
 	@Id

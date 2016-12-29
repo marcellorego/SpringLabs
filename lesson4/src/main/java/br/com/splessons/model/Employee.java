@@ -3,6 +3,8 @@ package br.com.splessons.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -29,6 +31,9 @@ import lombok.experimental.NonFinal;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name="EMPLOYEE")
+@AttributeOverrides({
+	@AttributeOverride(name="id", column = @Column(name="EMPLOYEE_ID"))
+})
 public class Employee extends IdBasedEntity {
  
 	private static final long serialVersionUID = 104911046661599665L;

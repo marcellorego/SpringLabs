@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import br.com.splessons.model.Employee;
 
 @Repository("employeeDao")
-public class EmployeeDaoImpl extends AbstractDao<Employee> implements IEmployeeDao {
+public class EmployeeDaoImpl extends AbstractHibernateDao<Employee> implements IEmployeeDao {
  
     public void saveEmployee(Employee employee) {
         persist(employee);
@@ -23,11 +23,8 @@ public class EmployeeDaoImpl extends AbstractDao<Employee> implements IEmployeeD
     }
  
     public void deleteEmployeeBySsn(String ssn) {
-    	StringBuilder sb = new StringBuilder();
-    	sb.append("delete from ")
-    	.append(persistentClass.getSimpleName().toUpperCase())
-    	.append(" where ssn = :ssn");
-        Query query = getSession().createSQLQuery(sb.toString());
+    	String hql = "delete from Employee where ssn = :ssn"; 
+		Query query = getSession().createQuery(hql);
         query.setString("ssn", ssn);
         query.executeUpdate();
     }
