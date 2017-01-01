@@ -38,7 +38,7 @@ public class App implements CommandLineRunner {
 	}*/
 	
 	@Autowired
-	private CustomerRepository repository;
+	private EmployeeRepository repository;
 	
 	@Override
 	public void run(String... args) throws Exception {

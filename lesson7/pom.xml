@@ -19,7 +19,7 @@
 	<properties>
 		<springframework.version>4.0.6.RELEASE</springframework.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
-		<mysql.connector.version>5.1.31</mysql.connector.version>
+		<postgresql.version>9.4.1212.jre7</postgresql.version>
 	</properties>
 
 	<dependencies>
@@ -29,11 +29,10 @@
 		</dependency>
 		<!-- dependency> <groupId>com.h2database</groupId> <artifactId>h2</artifactId> 
 			</dependency -->
-		<!-- MySQL -->
+		<!-- postgresql -->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.31</version>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
