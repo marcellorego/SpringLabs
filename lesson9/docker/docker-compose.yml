@@ -1,0 +1,11 @@
+version: '2'
+services:
+  testdb:
+    build: .
+    ports:
+      - '3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=secretadmin
+      - MYSQL_DATABASE=testDB
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=secretuser

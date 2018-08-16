@@ -1,0 +1,16 @@
+name: test-YAML
+environment: test
+servers:
+    - www.abc.test.com
+    - www.xyz.test.com
+mappings:
+  title:
+    1: Mr.
+    2: Mrs.
+  state:
+    -
+      from: original value
+      to: new value
+    -
+      from: original value 2
+      to: new value 2
