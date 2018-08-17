@@ -24,8 +24,9 @@ public class RatingController {
 
   @GetMapping("")
   public List<Rating> findRatingsByBookId(@RequestParam Long bookId) {
-    return bookId == null || bookId.equals(0L) ? Collections.EMPTY_LIST
-        : ratingList.stream().filter(r -> r.getBookId().equals(bookId)).collect(Collectors.toList());
+    return bookId == null || bookId.equals(0L) ? 
+      Collections.emptyList() : 
+      ratingList.stream().filter(r -> r.getBookId().equals(bookId)).collect(Collectors.toList());
   }
 
   @GetMapping("/all")
