@@ -8,6 +8,7 @@ public class ExceptionInfo {
     private final String error;
     private final String exception;
     private final String path;
+    private String cause;
     private String key;
 
     private ExceptionInfo(ExceptionInfoBuilder builder) {
@@ -17,6 +18,7 @@ public class ExceptionInfo {
         this.error = builder.error;
         this.exception = builder.exception;
         this.path = builder.path;
+        this.cause = builder.cause;
         this.key = builder.key;
     }
 
@@ -40,6 +42,10 @@ public class ExceptionInfo {
         return path;
     }
 
+    public String getCause() {
+        return cause;
+    }
+
     public String getKey() {
         return key;
     }
@@ -56,6 +62,7 @@ public class ExceptionInfo {
         private String error;
         private String exception;
         private String path;
+        private String cause;
         private String key;
         
         public ExceptionInfo build() {
@@ -84,6 +91,10 @@ public class ExceptionInfo {
         }
         public ExceptionInfoBuilder path(String value) { 
             this.path = value; 
+            return this;
+        }
+        public ExceptionInfoBuilder cause(String value) {
+            this.cause = value;
             return this;
         }
         public ExceptionInfoBuilder key(String value) {
