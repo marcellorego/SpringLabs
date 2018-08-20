@@ -1,14 +1,22 @@
 package br.com.splessons.lesson12.model;
 
 
-import lombok.*;
-import lombok.experimental.Accessors;
-import org.hibernate.annotations.NaturalId;
-
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.NaturalId;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
-@Table(name = "roles")
+@Table(name = "ROLE", uniqueConstraints = {
+        @UniqueConstraint(name = "UK_ROLE_NAME", columnNames = {
+                "NAME"
+        })
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,6 +24,7 @@ import javax.persistence.*;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     @NaturalId

@@ -1,13 +1,14 @@
 package br.com.splessons.lesson12.model.audit;
 
+import javax.persistence.MappedSuperclass;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 
-import javax.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
 
 @MappedSuperclass
 @JsonIgnoreProperties(

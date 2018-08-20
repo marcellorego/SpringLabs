@@ -1,6 +1,7 @@
 package br.com.splessons.lesson12.security.domain;
 
 
+import br.com.splessons.lesson12.model.Role;
 import br.com.splessons.lesson12.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -13,11 +14,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Getter
-public class UserPrincipal implements UserDetails {
+public class UserPrincipal implements UserDetails, UserInfo {
 
     private @NonNull Long id;
 
@@ -31,15 +33,11 @@ public class UserPrincipal implements UserDetails {
     @JsonIgnore
     private @NonNull String password;
 
-    private @NonNull Collection<? extends GrantedAuthority> authorities;
+    private @NonNull Set<Role> roles;
+
+    //private @NonNull Collection<? extends GrantedAuthority> authorities;
 
     public static UserPrincipal create(User user) {
-
-        List<GrantedAuthority> authorities = user.getRoles()
-                .stream()
-                .map(role -> role.getName())
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
 
         return new UserPrincipal(
                 user.getId(),
@@ -47,8 +45,13 @@ public class UserPrincipal implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+                user.getRoles()
         );
+    }
+
+    @Override
+    public Long getId() {
+        return id;
     }
 
     @Override
@@ -62,8 +65,18 @@ public class UserPrincipal implements UserDetails {
     }
 
     @Override
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return getRoles()
+        .stream()
+        .map(role -> role.getName())
+        .map(SimpleGrantedAuthority::new)
+        .collect(Collectors.toList());
     }
 
     @Override
