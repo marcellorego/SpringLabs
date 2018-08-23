@@ -4,49 +4,59 @@ package br.com.splessons.lesson12.security.domain;
 import br.com.splessons.lesson12.model.Role;
 import br.com.splessons.lesson12.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
-@Getter
 public class UserPrincipal implements UserDetails, UserInfo {
 
-    private @NonNull Long id;
+    private final Long id;
 
-    private @NonNull String name;
+    private final String firstName;
 
-    private @NonNull String username;
+    private final String lastName;
+
+    private final String username;
+
+    private final boolean active;
 
     @JsonIgnore
-    private @NonNull String email;
+    private final String email;
 
     @JsonIgnore
-    private @NonNull String password;
+    private final String password;
 
-    private @NonNull Set<Role> roles;
+    private final Set<Role> roles;
 
-    //private @NonNull Collection<? extends GrantedAuthority> authorities;
+    private UserPrincipal(Long id, String firstName, String lastName, String username,
+                         boolean active, String email, String password, Set<Role> roles) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.active = active;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 
     public static UserPrincipal create(User user) {
 
-        return new UserPrincipal(
-                user.getId(),
-                user.getName(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getRoles()
-        );
+       return new UserPrincipal(
+               user.getId(),
+               user.getFirstName(),
+               user.getLastName(),
+               user.getUsername(),
+               user.isActive(),
+               user.getEmail(),
+               user.getPassword(),
+               user.getRoles()
+       );
     }
 
     @Override
@@ -55,8 +65,28 @@ public class UserPrincipal implements UserDetails, UserInfo {
     }
 
     @Override
+    public String getFirstName() {
+        return firstName;
+    }
+
+    @Override
+    public String getLastName() {
+        return lastName;
+    }
+
+    @Override
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public boolean isActive() {
+        return active;
     }
 
     @Override
@@ -96,7 +126,7 @@ public class UserPrincipal implements UserDetails, UserInfo {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isActive();
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,12 +19,22 @@ public class BasicHttpStatusExceptionAdvice extends ResponseEntityExceptionHandl
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(BasicHttpStatusExceptionAdvice.class);
 
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ExceptionInfo> handle(HttpServletRequest request, Exception ex) {
+        LOGGER.warn("Unexpected response from remote service. Status code: {}", HttpStatus.UNAUTHORIZED, ex);
+        String path = request.getRequestURI();
+        HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
+        ExceptionInfo exceptionInfo = this.buildBasicExceptionResponse(path, httpStatus, ex);
+        return new ResponseEntity<>(exceptionInfo, httpStatus);
+    }
+
     @ExceptionHandler(HttpStatusCodeException.class)
-    public ExceptionInfo handle(HttpServletRequest request, HttpStatusCodeException ex) {
+    public ResponseEntity<ExceptionInfo> handle(HttpServletRequest request, HttpStatusCodeException ex) {
         LOGGER.warn("Unexpected response from remote service. Status code: {}", ex.getStatusCode(), ex);
         String path = request.getRequestURI();
-        HttpStatus status = ex.getStatusCode();
-        return this.buildBasicExceptionResponse(path, status, ex);
+        HttpStatus httpStatus = ex.getStatusCode();
+        ExceptionInfo exceptionInfo = this.buildBasicExceptionResponse(path, httpStatus, ex);
+        return new ResponseEntity<>(exceptionInfo, httpStatus);
     }
 
 //    @ExceptionHandler(AppException.class)
@@ -41,9 +52,8 @@ public class BasicHttpStatusExceptionAdvice extends ResponseEntityExceptionHandl
 
         LOGGER.warn("Unexpected response from remote service. Key code: {}", ex.getKey(), ex);
         String path = request.getRequestURI();
-        String key = ex.getKey();
         HttpStatus httpStatus = BasicHttpStatusExceptionAdvice.findResponseStatus(ex.getClass());
-        ExceptionInfo exceptionInfo = this.buildAppExceptionResponse(path, key, httpStatus, ex);
+        ExceptionInfo exceptionInfo = this.buildAppExceptionResponse(path, httpStatus, ex);
 
         return new ResponseEntity<>(exceptionInfo, httpStatus);
     }
@@ -52,14 +62,14 @@ public class BasicHttpStatusExceptionAdvice extends ResponseEntityExceptionHandl
         return BasicHttpStatusExceptionAdvice.createExceptionInfo(path, status, ex);
     }
 
-    protected ExceptionInfo buildAppExceptionResponse(String path, String key, HttpStatus status, Exception ex) {
-        return BasicHttpStatusExceptionAdvice.createAppExceptionInfo(path, key, status, ex);
+    protected ExceptionInfo buildAppExceptionResponse(String path, HttpStatus status, AppException ex) {
+        return BasicHttpStatusExceptionAdvice.createAppExceptionInfo(path, status, ex);
     }
 
-    public static ExceptionInfo createAppExceptionInfo(String path, String key, HttpStatus status, Exception ex) {
+    public static ExceptionInfo createAppExceptionInfo(String path, HttpStatus status, AppException ex) {
         return new ExceptionInfo.ExceptionInfoBuilder()
                 .path(path)
-                .key(key)
+                .key(ex.getKey())
                 .status(status.toString())
                 .error(status.getReasonPhrase())
                 .message(ex.getLocalizedMessage())

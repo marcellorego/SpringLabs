@@ -18,7 +18,7 @@ public class UserController {
     private UserMapper userMapper;
 
     @GetMapping("/me")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("isAuthenticated()")
     public UserProfile getCurrentUser(@CurrentUser UserPrincipal currentUser) {
 
         UserProfile result = userMapper.fromUserToUserProfile(currentUser);

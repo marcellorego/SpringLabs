@@ -28,9 +28,6 @@ import java.net.URI;
 public class AuthController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
     private JwtTokenProvider tokenProvider;
 
     @Autowired
@@ -39,16 +36,10 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<JwtAuthenticationResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsernameOrEmail(),
-                        loginRequest.getPassword()
-                )
-        );
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        Authentication authentication = authService.signInRequest(loginRequest);
 
         String jwt = tokenProvider.createAuthenticationToken(authentication);
+
         return ResponseEntity
                 .ok()
                 .header(TokenHelper.TOKEN_HEADER_PREFIX, TokenHelper.TOKEN_HEADER_PREFIX + jwt)

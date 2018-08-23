@@ -10,9 +10,13 @@ public interface UserInfo {
 
     Set<Role> getRoles();
 
-    String getName();
+    String getFirstName();
+
+    String getLastName();
 
     String getUsername();
 
     String getEmail();
+
+    boolean isActive();
 }

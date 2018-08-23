@@ -1,4 +1,4 @@
-package br.com.splessons.lesson12.security;
+package br.com.splessons.lesson12.security.filter;
 
 import java.io.IOException;
 
@@ -7,19 +7,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.splessons.lesson12.security.JwtTokenProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import br.com.splessons.lesson12.security.helper.TokenHelper;
-import br.com.splessons.lesson12.security.service.CustomUserDetailsService;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -31,12 +25,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+
+        LOGGER.debug("Processing authentication for '{}'", request.getRequestURL());
+
         Authentication authentication = tokenProvider.getAuthentication(request, response);
+
         if (authentication != null) {
             // User has been authenticated => update context, subsequent filters will recognize this and not attempt authentication.
             LOGGER.debug("Authenticated user {} using JWT !", authentication.getName());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
         filterChain.doFilter(request, response);
     }
