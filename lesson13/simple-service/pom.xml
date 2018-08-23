@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.splessons</groupId>
-	<artifactId>rating-service</artifactId>
+	<artifactId>simple-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>rating-service</name>
-	<description>Rating service</description>
+	<name>simple-service</name>
+	<description>Simple Service</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -27,9 +27,9 @@
 
 	<dependencies>
 		<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-web</artifactId>
-	</dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
