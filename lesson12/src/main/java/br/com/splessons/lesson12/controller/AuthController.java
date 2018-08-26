@@ -7,6 +7,7 @@ import br.com.splessons.lesson12.security.domain.UserInfo;
 import br.com.splessons.lesson12.security.helper.TokenHelper;
 import br.com.splessons.lesson12.service.IAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +27,9 @@ import java.net.URI;
 @RequestMapping(path = "${app.base-path}${app.auth-path}",
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AuthController {
+
+    @Value("${app.base-path}${app.user-path}")
+    private String userApiPath;
 
     @Autowired
     private JwtTokenProvider tokenProvider;
@@ -53,7 +57,7 @@ public class AuthController {
         UserInfo userInfo = authService.signUpUser(signUpRequest);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/users/{username}")
+                .fromCurrentContextPath().path(userApiPath.concat("/{username}"))
                 .buildAndExpand(userInfo.getUsername()).toUri();
 
         return ResponseEntity.created(location).body(new SignUpResponse("User registered successfully"));
