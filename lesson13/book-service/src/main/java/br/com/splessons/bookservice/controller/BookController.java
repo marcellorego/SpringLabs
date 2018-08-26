@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.splessons.bookservice.model.Book;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/book")
 public class BookController {
 
   private List<Book> bookList = Arrays.asList(
