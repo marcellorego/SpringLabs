@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://${user.home}/web/git/SpringLabs/lesson13/application-config
+
+#security.user.name=root
+#security.user.password=s3cr3t
+#spring.cloud.config.server.git.uri=file://${ROOT_FOLDER}/application-config
+#spring.cloud.config.server.git.uri=ssh://localhost/config-repo
+#spring.cloud.config.server.git.clone-on-start=true
+#eureka.client.registryFetchIntervalSeconds=5
+#eureka.client.serviceUrl.defaultZone=http://localhost:8082/eureka/
+
+# eureka client
+eureka:
+  client:
+    region: default
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://localhost:8082/eureka/
+
