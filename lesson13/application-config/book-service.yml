@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: book-service
+
+server:
+  port: 8083
+
+# eureka client
+eureka:
+  client:
+    region: default
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://localhost:8082/eureka/

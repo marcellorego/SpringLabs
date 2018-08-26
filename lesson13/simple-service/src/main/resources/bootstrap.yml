@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    config:
+      name: simple-service
+      discovery:
+        enabled: true
+        service-id: config
+
+#spring.cloud.config.uri=http://localhost:8081
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8082/eureka/
