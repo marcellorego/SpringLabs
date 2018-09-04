@@ -7,11 +7,15 @@ server:
 
 # eureka client
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
+    register-with-eureka: true
+    fetch-registry: true
     region: default
     registry-fetch-interval-seconds: 5
     service-url:
-      defaultZone: http://localhost:8082/eureka/
+      defaultZone: ${EUREKA_URI:http://localhost:8082/eureka/}
 
 user:
   environment: Production
@@ -19,6 +23,9 @@ user:
 ---
 spring:
   profiles: dev
+
+server:
+  port: 8086
 
 user:
   environment: Development

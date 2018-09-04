@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: book-service
   cloud:
     config:
       name: book-service
@@ -9,4 +11,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8082/eureka/
+      defaultZone: ${EUREKA_URI:http://localhost:8082/eureka/}

@@ -5,10 +5,42 @@ spring:
 server:
   port: 8083
 
+logging:
+  level:
+    br.com.splessons.bookservice: DEBUG
+    org.hibernate.SQL: INFO
+
 # eureka client
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
+    register-with-eureka: true
+    fetch-registry: true
     region: default
     registry-fetch-interval-seconds: 5
     service-url:
-      defaultZone: http://localhost:8082/eureka/
+      defaultZone: ${EUREKA_URI:http://localhost:8082/eureka/}
+
+
+## Spring Jackson
+spring.jackson.serialization.INDENT_OUTPUT: true
+
+## Spring H2
+spring.h2.console.enabled: true
+
+## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+spring.datasource.url: jdbc:hsqldb:file:./data/book
+spring.datasource.username: admin
+spring.datasource.password: admin123
+spring.datasource.platform: hsqldb
+spring.datasource.driver-class-name: org.hsqldb.jdbcDriver
+spring.datasource.data: classpath:scripts/init.sql
+
+## Hibernate Properties
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.HSQLDialect
+spring.jpa.database-platform: org.hibernate.dialect.HSQLDialect
+spring.jpa.show-sql: true
+spring.jpa.hibernate.format_sql: true
+spring.jpa.hibernate.ddl-auto: create-drop

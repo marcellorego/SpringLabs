@@ -1,7 +1,9 @@
+---
+# This default profile is used when running a single instance completely standalone:
 spring:
   profiles: default
   application:
-    name: discovery # ==> This is Service-Id
+      name: discovery   # ==> This is Service-Id
 
 server:
   port: 8082
@@ -9,22 +11,18 @@ server:
 eureka:
   instance:
     hostname: localhost
-#    appname: eureka-cluster
+    appname: discovery-cluster
   client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
-#eureka.client.register-with-eureka=true PRODUCTION
-
-
 ---
-
 spring:
   profiles: discovery-replica-1
   application:
-    name: discovery # ==> This is Service-Id
+    name: discovery   # ==> This is Service-Id
 
 server:
   port: 9001
@@ -32,20 +30,19 @@ server:
 eureka:
   instance:
     hostname: localhost
-#    appname: eureka-cluster
+    appname: discovery-cluster
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:9002/eureka/,http://localhost:9003/eureka/
-
+      defaultZone: http://localhost:9002/eureka/
+#,http://my-eureka-server-vn.com:9003/eureka/
 
 ---
-
 spring:
   profiles: discovery-replica-2
   application:
-    name: discovery # ==> This is Service-Id
+    name: discovery   # ==> This is Service-Id
 
 server:
   port: 9002
@@ -53,30 +50,9 @@ server:
 eureka:
   instance:
     hostname: localhost
-#    appname: eureka-cluster
+    appname: discovery-cluster
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:9001/eureka/,http://localhost:9003/eureka/
-
-
----
-
-spring:
-  profiles: discovery-replica-3
-  application:
-    name: discovery # ==> This is Service-Id
-
-server:
-  port: 9003
-
-eureka:
-  instance:
-    hostname: localhost
-#    appname: eureka-cluster
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://localhost:9001/eureka/,http://localhost:9002/eureka/
+      defaultZone: http://localhost:9001/eureka/

@@ -1,16 +1,21 @@
 package br.com.splessons.bookservice.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "book")
 public class Book {
 
+  @Id @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
+
+  @Column(nullable = false)
   private String author;
+
+  @Column(nullable = false)
   private String title;
 
-  public Book(Long id, String author, String title) {
-    this.id = id;
-    this.author = author;
-    this.title = title;
-  }
+  public Book() { }
 
   public Long getId() {
     return this.id;

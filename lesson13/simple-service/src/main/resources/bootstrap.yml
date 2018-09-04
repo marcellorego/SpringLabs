@@ -1,14 +1,16 @@
+#spring.cloud.config.uri=http://localhost:8081
+
 spring:
+  application:
+    name: simple-service
   cloud:
     config:
       name: simple-service
       discovery:
-        enabled: true
         service-id: config
-
-#spring.cloud.config.uri=http://localhost:8081
+        enabled: true
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8082/eureka/
+      defaultZone: ${EUREKA_URI:http://localhost:8082/eureka/}

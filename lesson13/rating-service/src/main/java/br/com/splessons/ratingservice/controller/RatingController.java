@@ -22,9 +22,14 @@ public class RatingController {
 
   @GetMapping("/book/{bookId}")
   public List<Rating> findRatingsByBookId(@PathVariable("bookId") Long bookId) {
-    return bookId == null || bookId.equals(0L) ? 
-      Collections.emptyList() : 
-      ratingList.stream().filter(r -> r.getBookId().equals(bookId)).collect(Collectors.toList());
+    return bookId == null || bookId.equals(0L) ?
+            Collections.emptyList() :
+            ratingList.stream().filter(r -> r.getBookId().equals(bookId)).collect(Collectors.toList());
+  }
+
+  @GetMapping("/book/stars/{bookId}")
+  public List<Integer> findStarsByBookId(@PathVariable("bookId") Long bookId) {
+    return findRatingsByBookId(bookId).stream().map(rating -> rating.getStars()).collect(Collectors.toList());
   }
 
   @GetMapping("/{ratingId}")

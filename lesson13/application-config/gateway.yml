@@ -4,13 +4,18 @@ spring:
 
 server:
   port: 8080
- 
+
+# eureka client
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
+    register-with-eureka: true
+    fetch-registry: true
     region: default
     registry-fetch-interval-seconds: 5
     service-url:
-      defaultZone: http://localhost:8082/eureka/
+      defaultZone: ${EUREKA_URI:http://localhost:8082/eureka/}
 
 # zuul routes
 
@@ -21,10 +26,10 @@ eureka:
 
 zuul:
   routes:
-    discovery:
-      path: /discovery/**
-      sensitive-headers: Set-Cookie,Authorization
-      url: http://localhost:8082
+#    discovery:
+#      path: /discovery/**
+#      sensitive-headers: Set-Cookie,Authorization
+#      url: http://localhost:8082
     book-service:
       path: /book-service/**
       sensitive-headers: Set-Cookie,Authorization
@@ -35,7 +40,7 @@ zuul:
       path: /simple-service/**
       sensitive-headers: Set-Cookie,Authorization
 
-hystrix.command.discovery.execution.isolation.thread.timeoutInMilliseconds: 60000
+#hystrix.command.discovery.execution.isolation.thread.timeoutInMilliseconds: 60000
 hystrix.command.book-service.execution.isolation.thread.timeoutInMilliseconds: 60000
 hystrix.command.rating-service.execution.isolation.thread.timeoutInMilliseconds: 60000
 hystrix.command.simple-service.execution.isolation.thread.timeoutInMilliseconds: 60000
