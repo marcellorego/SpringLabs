@@ -1,9 +1,6 @@
 package br.com.splessons;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
-
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +8,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import lombok.SneakyThrows;
+import java.math.BigDecimal;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 
 @SpringBootApplication
 public class App implements CommandLineRunner {

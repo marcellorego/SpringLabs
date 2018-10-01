@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: mongo-service
+  cloud:
+    config:
+      name: mongo-service
+      discovery:
+        service-id: config
+        enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8082/eureka/}

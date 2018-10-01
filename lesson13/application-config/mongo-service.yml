@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: mongo-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/mongo-service?maxPoolSize=10
+
+server:
+  port: 8086
+
+# eureka client
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    region: default
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8082/eureka/}
+
+logging:
+  path: ./logs
+  level:
+    org.springframework.data.mongodb.core: DEBUG
+
+
+api:
+  base-path:
+  document-path: /document

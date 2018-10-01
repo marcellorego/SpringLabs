@@ -4,18 +4,18 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>br.com.splessons</groupId>
-    <artifactId>lesson13</artifactId>
+    <artifactId>lesson14</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>config-server</module>
-        <module>discovery-server</module>
-        <module>gateway-server</module>
-        <module>book-service</module>
+        <module>config-service</module>
+        <module>discovery-service</module>
+        <module>gateway-service</module>
+        <module>product-query-service</module>
+        <!-- <module>book-service</module>
         <module>rating-service</module>
-        <module>simple-service</module>
-        <module>mongo-service</module>
+        <module>simple-service</module> -->
     </modules>
 
 </project>
