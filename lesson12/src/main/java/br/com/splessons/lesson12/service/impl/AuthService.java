@@ -82,9 +82,7 @@ public class AuthService implements IAuthService {
                 )
             );
             return authentication;
-        } catch (DisabledException e) {
-            throw new AuthenticationException(e);
-        } catch (BadCredentialsException e) {
+        } catch (DisabledException | BadCredentialsException | AuthenticationException e) {
             throw new AuthenticationException(e);
         }
     }

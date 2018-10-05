@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -101,7 +102,7 @@ public class JwtTokenProvider {
                         return auth;
                     }
                 }
-            } catch (JwtException e) {
+            } catch (JwtException | AuthenticationException e) {
                 LOGGER.error(e.getMessage(), e);
             } catch (Exception e) {
                 LOGGER.error(e.getMessage(), e);
