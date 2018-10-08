@@ -119,15 +119,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                )
             .antMatchers(
                 "/favicon.ico",
-                "/**/*.png",
-                "/**/*.gif",
-                "/**/*.svg",
-                "/**/*.jpg",
-                "/**/*.html",
-                "/**/*.css",
-                "/**/*.js",
-                "/resources/**",
-                "/static/**",
                 "/css/**",
                 "/js/**",
                 "/images/**");
