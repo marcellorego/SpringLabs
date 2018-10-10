@@ -1,0 +1,17 @@
+{
+  "host" : "mailer@mail.com",
+  "port" : 9090,
+  "resend" : true,
+  "topics" : ["spring", "boot"],
+  "sender" : {
+    "name": "sender",
+    "address": "street"
+  },
+  "names": [{
+    "order": 0,
+    "name": "Name0"
+  },{
+    "order": 1,
+    "name": "Name1"
+  }]
+}
